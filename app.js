@@ -9,6 +9,11 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+// add openshift specific environment variables
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 5000,
+
+    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -40,4 +45,4 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(5000);
+app.listen(port,ip);
